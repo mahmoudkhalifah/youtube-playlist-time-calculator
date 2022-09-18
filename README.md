@@ -1,6 +1,7 @@
 # youtube-playlist-time-calculator
 
-This script is developed by Mahmoud Khalifa
+This script is developed by Mahmoud Khalifa.
+
 LinkedIn: https://www.linkedin.com/in/mahmoud-khalifa-26438a196/
 GitHub: https://github.com/mahmoudkhalifah
 
