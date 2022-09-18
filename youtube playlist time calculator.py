@@ -10,18 +10,19 @@ def openWebpage(url):
     time.sleep(3)
     return driver
 
-def scrollToEndOfPage():
+def scrollToEndOfPage(driver):
     scrollHeight = 1200
     maxHeight = int(driver.find_element(by= By.TAG_NAME,value='ytd-browse').size["height"])
     while scrollHeight < maxHeight:
         driver.execute_script(f'window.scrollTo(0,{scrollHeight});')
+        time.sleep(0.05)
         if(scrollHeight + 600 >=maxHeight):
             time.sleep(1)
         if(maxHeight!= int(driver.find_element(by= By.TAG_NAME,value='ytd-browse').size["height"])):
             maxHeight = int(driver.find_element(by= By.TAG_NAME,value='ytd-browse').size["height"])
         scrollHeight+=600
 
-def calculateTotalTime():
+def calculateTotalTime(driver):
     mins = 0
     secs = 0
     for time in driver.find_elements(by= By.CLASS_NAME,value='ytd-thumbnail-overlay-time-status-renderer'):
@@ -39,8 +40,8 @@ def calculateTotalTime():
 if __name__ == "__main__":
     url = input("enter playlist's url: ")
     driver = openWebpage(url=url)
-    scrollToEndOfPage()
-    hours,mins,secs = calculateTotalTime()
+    scrollToEndOfPage(driver=driver)
+    hours,mins,secs = calculateTotalTime(driver=driver)
     print(f'total time is: {hours:02d}:{mins:02d}:{secs:02d}')
     driver.close()
     input("Press any key to close")
