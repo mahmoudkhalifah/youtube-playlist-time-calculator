@@ -23,16 +23,22 @@ def scrollToEndOfPage(driver):
         scrollHeight+=600
 
 def calculateTotalTime(driver):
+    hours = 0
     mins = 0
     secs = 0
     for time in driver.find_elements(by= By.CLASS_NAME,value='ytd-thumbnail-overlay-time-status-renderer'):
         if(time.text!=""):
             splitted_time_string = time.text.split(":")
-            mins += int(splitted_time_string[0])
-            secs += int(splitted_time_string[1])
+            if(len(splitted_time_string)==3):
+                hours += int(splitted_time_string[0])
+                mins += int(splitted_time_string[1])
+                secs += int(splitted_time_string[2])
+            elif(len(splitted_time_string)==2):
+                mins += int(splitted_time_string[0])
+                secs += int(splitted_time_string[1])
     mins+= int(secs/60)
     secs%=60
-    hours = int(mins/60)
+    hours += int(mins/60)
     mins%=60
     return hours,mins,secs
 
